@@ -18,13 +18,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # The gps config appropriate for this device
 
-PRODUCT_COPY_FILES += device/htc/primou/gps.conf:system/etc/gps.conf
+PRODUCT_COPY_FILES += device/htc/primou/prebuilt/etc/gps.conf:system/etc/gps.conf
 
 ## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 
 PRODUCT_COPY_FILES += \
-    device/htc/primou/init.primou.rc:root/init.primou.rc \
-    device/htc/primou/ueventd.primou.rc:root/ueventd.primou.rc
+    device/htc/primou/prebuilt/root/init.primou.rc:root/init.primou.rc \
+    device/htc/primou/prebuilt/root/ueventd.primou.rc:root/ueventd.primou.rc
 
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
