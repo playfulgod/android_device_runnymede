@@ -58,9 +58,13 @@ PRODUCT_PACKAGES += \
     lights.primou \
     sensors.primou
 
-	# Additional packages
+# bluetooth audio
 PRODUCT_PACKAGES += \
-    GooManager \
+  audio.a2dp.default 
+
+# Additional packages
+PRODUCT_PACKAGES += \
+    GooManager 
    	
 # idc files
 PRODUCT_COPY_FILES += \
@@ -87,7 +91,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/primou/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml	
 
-# Kernel modules
+# bluetooth config file
+PRODUCT_COPY_FILES += \
+    system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf 
+
+#
+## Kernel modules
 #PRODUCT_COPY_FILES += \
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
