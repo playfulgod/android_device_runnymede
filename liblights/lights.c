@@ -71,6 +71,7 @@ static int write_int (const char* path, int value) {
 
 	char buffer[20];
 	int bytes = snprintf(buffer, sizeof(buffer), "%d\n",value);
+    LOGV("write_int %s %d\n", path, value);
 	int written = write (fd, buffer, bytes);
 	close (fd);
 
@@ -178,7 +179,7 @@ static void handle_speaker_battery_locked (struct light_device_t *dev) {
 
 static int set_light_buttons (struct light_device_t* dev,
 		struct light_state_t const* state) {
-	LOGE("set_light_buttons");
+	LOGV("set_light_buttons");
 	int err = 0;
 	int on = is_lit (state);
 	pthread_mutex_lock (&g_lock);
@@ -198,7 +199,7 @@ static int rgb_to_brightness(struct light_state_t const* state)
 
 static int set_light_backlight(struct light_device_t* dev,
 		struct light_state_t const* state) {
-	LOGE("set_light_backlight");
+	LOGV("set_light_backlight");
 	int err = 0;
 	int brightness = rgb_to_brightness(state);
 	LOGV("%s brightness=%d color=0x%08x",
@@ -212,7 +213,7 @@ static int set_light_backlight(struct light_device_t* dev,
 
 static int set_light_battery (struct light_device_t* dev,
 		struct light_state_t const* state) {
-	LOGE("set_light_battery");
+	LOGV("set_light_battery");
 	pthread_mutex_lock (&g_lock);
 	g_battery = *state;
 	handle_speaker_battery_locked(dev);
@@ -223,17 +224,14 @@ static int set_light_battery (struct light_device_t* dev,
 
 static int set_light_attention (struct light_device_t* dev,
 		struct light_state_t const* state) {
-	LOGE("set_light_attention");
-	pthread_mutex_lock (&g_lock);
-	g_notification = *state;
-	handle_speaker_battery_locked (dev);
-	pthread_mutex_unlock (&g_lock);
+	LOGV("set_light_attention");
+	/* no attention support */
 	return 0;
 }
 
 static int set_light_notifications (struct light_device_t* dev,
 		struct light_state_t const* state) {
-	LOGE("set_light_notifications");
+	LOGV("set_light_notifications");
 	pthread_mutex_lock (&g_lock);
 	g_notification = *state;
 	handle_speaker_battery_locked (dev);
