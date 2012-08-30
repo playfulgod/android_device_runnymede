@@ -71,6 +71,7 @@ static int write_int (const char* path, int value) {
 
 	char buffer[20];
 	int bytes = snprintf(buffer, sizeof(buffer), "%d\n",value);
+	LOGE("write_int %s %d\n", path, value);
 	int written = write (fd, buffer, bytes);
 	close (fd);
 
@@ -116,6 +117,9 @@ static void set_speaker_light_locked (struct light_device_t *dev, struct light_s
 					write_int (GREEN_BLINK_FILE, 0);
 					break;
 				default:
+					// tread unknown color like green
+					write_int (GREEN_BLINK_FILE, 1);
+					write_int (AMBER_LED_FILE, 0);
 					LOGE("set_led_state colorRGB=%08X, unknown color\n",
 							colorRGB);
 					break;
@@ -135,7 +139,37 @@ static void set_speaker_light_locked (struct light_device_t *dev, struct light_s
 					write_int (AMBER_LED_FILE, 0);
 					write_int (GREEN_LED_FILE, 0);
 					break;
+				default:
+					// tread unknown color like green
+					write_int (AMBER_LED_FILE, 0);
+					write_int (GREEN_LED_FILE, 1);
+					LOGE("set_led_state colorRGB=%08X, unknown color\n",
+							colorRGB);
+					break;
 
+			}
+			break;
+		case LIGHT_FLASH_HARDWARE:
+			switch (color) {
+				case LED_AMBER:
+					write_int (AMBER_LED_FILE, 1);
+					write_int (GREEN_LED_FILE, 0);
+					break;
+				case LED_GREEN:
+					write_int (AMBER_LED_FILE, 0);
+					write_int (GREEN_LED_FILE, 1);
+					break;
+				case LED_BLANK:
+					write_int (AMBER_LED_FILE, 0);
+					write_int (GREEN_LED_FILE, 0);
+					break;
+				default:
+					// tread unknown color like green
+					write_int (AMBER_LED_FILE, 0);
+					write_int (GREEN_LED_FILE, 1);
+					LOGE("set_led_state colorRGB=%08X, unknown color\n",
+							colorRGB);
+					break;
 			}
 			break;
 		default:
