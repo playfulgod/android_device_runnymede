@@ -43,14 +43,7 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 BOARD_HAVE_HTC_FFC := true
 BOARD_USE_REVERSE_FFC := true
-
-TARGET_USES_OVERLAY := false
-TARGET_COMPOSITION_BYPASS := true
-TARGET_NO_BYPASS_CROPPING := true
-TARGET_USES_C2D_COMPOSITION := true
-
-# Workaround for primou's broken overlay scaling
-#BOARD_OVERLAY_MINIFICATION_LIMIT := 2
+BOARD_USE_NEW_LIBRIL_HTC := true
 
 # cat /proc/emmc
 #dev:        size     erasesize name
@@ -101,6 +94,4 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file
 
-BOARD_USES_AUDIO_LEGACY := false
-TARGET_PROVIDES_LIBAUDIO := false
 

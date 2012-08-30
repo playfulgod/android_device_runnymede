@@ -58,14 +58,14 @@ PRODUCT_PACKAGES += \
     lights.primou \
     sensors.primou
 
-# bluetooth audio
+# audio
 PRODUCT_PACKAGES += \
-  audio.a2dp.default 
+  audio.a2dp.default
 
 # Additional packages
 PRODUCT_PACKAGES += \
     GooManager 
-   	
+
 # idc files
 PRODUCT_COPY_FILES += \
     device/htc/primou/prebuilt/usr/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
@@ -89,15 +89,16 @@ PRODUCT_COPY_FILES += \
 
 # media config xml file
 PRODUCT_COPY_FILES += \
-    device/htc/primou/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml	
+    device/htc/primou/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    device/htc/primou/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf
 
 # bluetooth config file
 PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf 
 
-#
-## Kernel modules
-#PRODUCT_COPY_FILES += \
+# apn config file
+PRODUCT_COPY_FILES += \
+    device/htc/primou/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := device/htc/primou/prebuilt/root/kernel
@@ -108,8 +109,9 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-PRODUCT_COPY_FILES += \
-    device/htc/primou/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko
+## Kernel modules
+#PRODUCT_COPY_FILES += \
+#    device/htc/primou/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko
 
 
 # stuff common to all HTC phones
