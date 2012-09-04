@@ -1343,13 +1343,13 @@ status_t get_batt_temp(int *batt_temp) {
     return NO_ERROR;
 }
 
-status_t do_tpa2051_control(int mode)
+status_t do_tpa2051_control(int inCall)
 {
     int fd, rc;
     int tpa_mode = TPA2051_MODE_OFF;
     int batt_temp = 0;
 
-    if (mode) {
+    if (inCall) {
         if (cur_rx == DEVICE_HEADSET_RX)
             tpa_mode = TPA2051_MODE_VOICECALL_HEADSET;
         else if (cur_rx == DEVICE_SPEAKER_RX)
@@ -1409,7 +1409,7 @@ status_t do_tpa2051_control(int mode)
 }
 
 static status_t do_route_audio_rpc(uint32_t device,
-                                   bool ear_mute, bool mic_mute,
+                                   bool inCall, bool mic_mute,
                                    uint32_t rx_acdb_id, uint32_t tx_acdb_id)
 {
     if(device == -1)
@@ -1417,7 +1417,7 @@ static status_t do_route_audio_rpc(uint32_t device,
 
     int new_rx_device = INVALID_DEVICE,new_tx_device = INVALID_DEVICE,fm_device = INVALID_DEVICE;
     Routing_table* temp = NULL;
-    LOGD("do_route_audio_rpc(%d, %d, %d)", device, ear_mute, mic_mute);
+    LOGD("do_route_audio_rpc(%d, %d, %d)", device, inCall, mic_mute);
 
     if(device == SND_DEVICE_HANDSET) {
         new_rx_device = DEVICE_HANDSET_RX;
@@ -1507,7 +1507,7 @@ static status_t do_route_audio_rpc(uint32_t device,
     if(new_tx_device != INVALID_DEVICE)
         LOGD("new_tx = %d", DEV_ID(new_tx_device));
 
-    if (ear_mute == false && !isStreamOn(VOICE_CALL)) {
+    if (inCall == true && !isStreamOn(VOICE_CALL)) {
         LOGD("Going to enable RX/TX device for voice stream");
             // Routing Voice
             if ( (new_rx_device != INVALID_DEVICE) && (new_tx_device != INVALID_DEVICE))
@@ -1551,7 +1551,7 @@ static status_t do_route_audio_rpc(uint32_t device,
             addToTable(0,cur_rx,cur_tx,VOICE_CALL,true);
             updateDeviceInfo(new_rx_device,new_tx_device, rx_acdb_id, tx_acdb_id);
     }
-    else if (ear_mute == true && isStreamOnAndActive(VOICE_CALL)) {
+    else if (inCall == false && isStreamOnAndActive(VOICE_CALL)) {
         LOGD("Going to disable RX/TX device during end of voice call");
         LOGD("Ending voice on Rx %d and Tx %d device", DEV_ID(cur_rx), DEV_ID(cur_tx));
         temp = getNodeByStreamType(VOICE_CALL);
@@ -1582,7 +1582,7 @@ static status_t do_route_audio_rpc(uint32_t device,
     }
 
     if (support_tpa2051)
-        do_tpa2051_control(ear_mute ^1);
+        do_tpa2051_control(inCall);
 
     return NO_ERROR;
 }
@@ -1644,7 +1644,7 @@ status_t AudioHardware::doAudioRouteOrMuteHTC(uint32_t device)
     LOGV("doAudioRouteOrMuteHTC() rx acdb %d, tx acdb %d", rx_acdb_id, tx_acdb_id);
     LOGV("doAudioRouteOrMuteHTC() device %x, mMode %d, mMicMute %d",
             device, mMode, mMicMute);
-    return do_route_audio_rpc(device, !isInCall(), mMicMute, rx_acdb_id, tx_acdb_id);
+    return do_route_audio_rpc(device, isInCall(), mMicMute, rx_acdb_id, tx_acdb_id);
 }
 
 // always call with mutex held
@@ -1667,7 +1667,7 @@ status_t AudioHardware::doAudioRouteOrMute(uint32_t device)
     if (!isHTCPhone) {
         LOGV("doAudioRouteOrMute() device %d, mMode %d, mMicMute %d",
                 device, mMode, mMicMute);
-        ret = do_route_audio_rpc(device, !isInCall(), mMicMute, 0, 0);
+        ret = do_route_audio_rpc(device, isInCall(), mMicMute, 0, 0);
     } else
         ret = doAudioRouteOrMuteHTC(device);
 
@@ -2732,8 +2732,8 @@ ssize_t AudioHardware::AudioStreamOutMSM72xx::write(const void* buffer, size_t b
         mStartCount = AUDIO_HW_NUM_OUT_BUF;
         mStandby = false;
 
-        if (support_tpa2051)
-            do_tpa2051_control(0);
+        //if (support_tpa2051)
+        //    do_tpa2051_control(0);
     }
 
     while (count) {
