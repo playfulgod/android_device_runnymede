@@ -1221,9 +1221,6 @@ status_t AudioHardware::setVoiceVolume(float v)
         v = 1.0;
     }
 
-    if(v == mVoiceVolume)
-        return NO_ERROR;
-
     mVoiceVolume = v;
 
     int vol = lrint(v * 100.0);
@@ -2269,8 +2266,9 @@ status_t AudioHardware::doRouting(AudioStreamInMSM72xx *input)
 #endif
 
     if (sndDevice != -1 && sndDevice != mCurSndDevice) {
-        ret = doAudioRouteOrMute(sndDevice);
+        // functions inside rely on setting mCurSndDevice before
         mCurSndDevice = sndDevice;
+        ret = doAudioRouteOrMute(sndDevice);
     }
 
     return ret;
