@@ -1591,8 +1591,8 @@ static status_t do_route_audio_rpc(uint32_t device,
         updateDeviceInfo(new_rx_device,new_tx_device, rx_acdb_id, tx_acdb_id);
     }
 
-    //if (support_tpa2051)
-    //    do_tpa2051_control(inCall);
+    if (support_tpa2051)
+        do_tpa2051_control(inCall);
 
     return NO_ERROR;
 }
