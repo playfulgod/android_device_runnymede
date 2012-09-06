@@ -93,4 +93,8 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file
 
+#these need to be checked as to which one is needed either 1 or 2
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun1/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun2/file
+
 
