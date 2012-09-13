@@ -85,12 +85,16 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
 BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
-#BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
+BOARD_SDEXT_DEVICE := /dev/block/mmcblk0p32
 BOARD_USES_MMCUTILS := false
 BOARD_HAS_NO_MISC_PARTITION := false
 
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file
+
+#these need to be checked as to which one is needed either 1 or 2
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun1/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun2/file
 
 
