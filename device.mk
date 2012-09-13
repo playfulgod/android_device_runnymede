@@ -63,6 +63,10 @@ PRODUCT_PACKAGES += \
   audio.a2dp.default \
   audio.primary.primou
 
+# video
+PRODUCT_PACKAGES += \
+  libI420colorconvert
+
 # Additional packages
 PRODUCT_PACKAGES += \
     GooManager 
