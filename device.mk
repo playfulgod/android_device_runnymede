@@ -60,8 +60,7 @@ PRODUCT_PACKAGES += \
 
 # audio
 PRODUCT_PACKAGES += \
-  audio.a2dp.default \
-  audio.primary.primou
+  audio.a2dp.default 
 
 # video
 PRODUCT_PACKAGES += \
