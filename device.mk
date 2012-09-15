@@ -69,7 +69,8 @@ PRODUCT_PACKAGES += \
 
 # Additional packages
 PRODUCT_PACKAGES += \
-    GooManager 
+    GooManager \
+    FileExplorer
 
 # idc files
 PRODUCT_COPY_FILES += \
@@ -105,6 +106,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/primou/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
 
+# init.d files
+PRODUCT_COPY_FILES += \
+    device/htc/primou/prebuilt/etc/init.d/01swap:system/etc/init.d/01swap
+
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := device/htc/primou/prebuilt/root/kernel
 else
@@ -133,8 +138,3 @@ $(call inherit-product, device/htc/primou/media_htcaudio.mk)
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
-# Goo updater app
-PRODUCT_PROPERTY_OVERRIDES += \
-ro.goo.developerid=Lloir \
-ro.goo.rom=cm9primou \
-ro.goo.version=6
