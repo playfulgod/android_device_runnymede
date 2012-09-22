@@ -105,7 +105,7 @@ static void set_speaker_light_locked (struct light_device_t *dev, struct light_s
 		case LIGHT_FLASH_TIMED:
 			switch (color) {
 				case LED_AMBER:
-					write_int (AMBER_BLINK_FILE, 4);
+					write_int (AMBER_BLINK_FILE, 1);
 					write_int (GREEN_LED_FILE, 0);
 					break;
 				case LED_GREEN:
@@ -129,15 +129,21 @@ static void set_speaker_light_locked (struct light_device_t *dev, struct light_s
 			switch (color) {
 				case LED_AMBER:
 					write_int (AMBER_LED_FILE, 1);
+					write_int (AMBER_BLINK_FILE, 0);
 					write_int (GREEN_LED_FILE, 0);
+					write_int (GREEN_BLINK_FILE, 0);
 					break;
 				case LED_GREEN:
 					write_int (AMBER_LED_FILE, 0);
+					write_int (AMBER_BLINK_FILE, 0);
 					write_int (GREEN_LED_FILE, 1);
+					write_int (GREEN_BLINK_FILE, 0);
 					break;
 				case LED_BLANK:
 					write_int (AMBER_LED_FILE, 0);
+					write_int (AMBER_BLINK_FILE, 0);
 					write_int (GREEN_LED_FILE, 0);
+					write_int (GREEN_BLINK_FILE, 0);
 					break;
 				default:
 					// tread unknown color like green
@@ -153,15 +159,21 @@ static void set_speaker_light_locked (struct light_device_t *dev, struct light_s
 			switch (color) {
 				case LED_AMBER:
 					write_int (AMBER_LED_FILE, 1);
+					write_int (AMBER_BLINK_FILE, 0);
 					write_int (GREEN_LED_FILE, 0);
+					write_int (GREEN_BLINK_FILE, 0);
 					break;
 				case LED_GREEN:
 					write_int (AMBER_LED_FILE, 0);
+					write_int (AMBER_BLINK_FILE, 0);
 					write_int (GREEN_LED_FILE, 1);
+					write_int (GREEN_BLINK_FILE, 0);
 					break;
 				case LED_BLANK:
 					write_int (AMBER_LED_FILE, 0);
+					write_int (AMBER_BLINK_FILE, 0);
 					write_int (GREEN_LED_FILE, 0);
+					write_int (GREEN_BLINK_FILE, 0);
 					break;
 				default:
 					// tread unknown color like green
@@ -188,11 +200,11 @@ static void set_speaker_light_locked_dual (struct light_device_t *dev, struct li
 	if ((bcolorRGB >> 16)&0xFF) bcolor = LED_AMBER;
 
 	if (bcolor == LED_AMBER) {
-		write_int (GREEN_LED_FILE, 1);
-		write_int (AMBER_BLINK_FILE, 4);
+		write_int (AMBER_LED_FILE, 1);
+		write_int (AMBER_BLINK_FILE, 1);
 	} else if (bcolor == LED_GREEN) {
 		write_int (GREEN_LED_FILE, 1);
-		write_int (AMBER_BLINK_FILE, 1);
+		write_int (GREEN_BLINK_FILE, 1);
 	} else {
 		LOGE("set_led_state (dual) unexpected color: bcolorRGB=%08x\n", bcolorRGB);
 	}
@@ -257,14 +269,13 @@ static int set_light_battery (struct light_device_t* dev,
 
 static int set_light_attention (struct light_device_t* dev,
 		struct light_state_t const* state) {
-	LOGV("set_light_attention");
-	/* no attention support */
+	LOGV("Attention is not supported!");
 	return 0;
 }
 
 static int set_light_notifications (struct light_device_t* dev,
 		struct light_state_t const* state) {
-	LOGV("set_light_notifications");
+	LOGV("Led Notification being set");
 	pthread_mutex_lock (&g_lock);
 	g_notification = *state;
 	handle_speaker_battery_locked (dev);
@@ -276,8 +287,8 @@ static int set_light_notifications (struct light_device_t* dev,
 static int close_lights (struct light_device_t *dev) {
 	if (dev)
 		free (dev);
-
 	return 0;
+	LOGV("Closed lights");
 }
 
 
@@ -330,7 +341,7 @@ const struct hw_module_t HAL_MODULE_INFO_SYM = {
 	.version_major = 1,
 	.version_minor = 0,
 	.id = LIGHTS_HARDWARE_MODULE_ID,
-	.name = "Bravo lights module",
-	.author = "Diogo Ferreira <diogo@underdev.org>",
+	.name = "Primo lights",
+	.author = "Max Weninger <max.weninger@gmail.com>",
 	.methods = &lights_module_methods,
 };
