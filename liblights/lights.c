@@ -331,7 +331,6 @@ static int close_lights (struct light_device_t *dev) {
 	if (dev)
 		free (dev);
 	return 0;
-	LOGV("Closed lights");
 }
 
 
