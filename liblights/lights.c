@@ -112,6 +112,13 @@ static int is_amber(int colorRGB) {
         && !has_blue(colorRGB);
 }
 
+// battery uses 00FFFF00 for charging which always should be amber
+static int is_amber_battery(int colorRGB) {
+    return ((colorRGB >> 16)&0xFF)==0xFF
+        && (((colorRGB >> 8)&0xFF)==0xFF) 
+        && !has_blue(colorRGB);
+}
+
 static int is_blank(int colorRGB) {
     return colorRGB==0;
 }
@@ -141,7 +148,7 @@ static void set_speaker_light_locked (struct light_device_t *dev, struct light_s
 
 	if(is_green(colorRGB))
         color=LED_GREEN;
-    else if(is_amber(colorRGB))
+    else if(is_amber(colorRGB) || is_amber_battery(colorRGB))
         color=LED_AMBER;
     else if(is_blank(colorRGB))
         color=LED_BLANK;
@@ -212,7 +219,7 @@ static void set_speaker_light_locked_dual (struct light_device_t *dev, struct li
 
 	if(is_green(bcolorRGB))
         bcolor=LED_GREEN;
-    else if(is_amber(bcolorRGB))
+    else if(is_amber(bcolorRGB) || is_amber_battery(bcolorRGB))
         bcolor=LED_AMBER;
     else if(is_blank(bcolorRGB))
         bcolor=LED_BLANK;
@@ -242,9 +249,9 @@ static void handle_speaker_battery_locked (struct light_device_t *dev) {
 	if (is_lit (&g_battery) && is_lit (&g_notification)) {
 		set_speaker_light_locked_dual (dev, &g_battery, &g_notification);
 	} else if (is_lit (&g_battery)) {
-		set_speaker_light_locked (dev, &g_battery);
+		set_speaker_light_locked(dev, &g_battery);
 	} else {
-		set_speaker_light_locked (dev, &g_notification);
+		set_speaker_light_locked(dev, &g_notification);
 	}
 }
 
