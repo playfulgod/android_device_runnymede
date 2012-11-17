@@ -29,16 +29,15 @@ USE_CAMERA_STUB := true
 -include device/htc/msm7x30-common/BoardConfigCommon.mk
 
 # inherit from the proprietary version
--include vendor/htc/primou/BoardConfigVendor.mk
+-include vendor/htc/runnymede/BoardConfigVendor.mk
 
-TARGET_BOOTLOADER_BOARD_NAME := primou
+TARGET_BOOTLOADER_BOARD_NAME := runnymede
 
-BOARD_KERNEL_CMDLINE := no_console_suspend=1
-BOARD_KERNEL_RECOVERY_CMDLINE := $(BOARD_KERNEL_CMDLINE) console=ttyHSL0,115200,n8 androidboot.hardware=primou msmsdcc_power_gpio=88
-BOARD_KERNEL_BASE := 0x13F00000
-BOARD_KERNEL_PAGE_SIZE := 4096
+BOARD_KERNEL_CMDLINE := 
+BOARD_KERNEL_BASE := 0x14400000
+BOARD_KERNEL_PAGESIZE := 4096
 
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := primou
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := runnymede
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 BOARD_HAVE_HTC_FFC := false
@@ -46,20 +45,24 @@ BOARD_USE_NEW_LIBRIL_HTC := true
 
 # cat /proc/emmc
 #dev:        size     erasesize name
-#mmcblk0p17: 00040000 00000200 "misc"
+#mmcblk0p28: 019ffa00 00000200 "misc"
 #mmcblk0p21: 0087f400 00000200 "recovery"
 #mmcblk0p22: 00400000 00000200 "boot"
-#mmcblk0p25: 22dffe00 00000200 "system"
-#mmcblk0p27: 12bffe00 00000200 "cache"
-#mmcblk0p26: 496ffe00 00000200 "userdata"
-#mmcblk0p28: 014bfe00 00000200 "devlog"
-#mmcblk0p29: 00040000 00000200 "pdata"
+#mmcblk0p25: 3ffffe00 00000200 "system"
+#mmcblk0p30: 23ff7c00 00000200 "cache"
+#mmcblk0p29: 101fffe00 00000200 "userdata"
+#mmcblk0p32: 01fbfc00 00000200 "devlog"
+#mmcblk0p33: 00040e00 00000200 "pdata"
+#mmcblk0p31: 00008000 00000200 "extra"
+#mmcblk0p26: 00300000 00000200 "modem_st1"
+#mmcblk0p27: 00300000 00000200 "modem_st2"
 
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 585101312
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 1232072704
-BOARD_BOOTIMAGE_PARTITION_SIZE := 4194304
-BOARD_FLASH_BLOCK_SIZE := 262144
+BOARD_BOOTIMAGE_PARTITION_SIZE := 00400000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0087f400
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3ffffe00
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 101fffe00
+BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Wifi related defines
 WIFI_BAND                        := 802_11_ABG
@@ -76,21 +79,21 @@ WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
 
-TARGET_KERNEL_SOURCE := kernel/htc/msm7x30
-TARGET_KERNEL_CONFIG := cyanogen_primou_defconfig
-TARGET_PREBUILT_KERNEL := device/htc/primou/prebuilt/kernel
+#TARGET_KERNEL_SOURCE := kernel/htc/msm7x30
+#TARGET_KERNEL_CONFIG := cyanogen_runnymede_defconfig
+TARGET_PREBUILT_KERNEL := device/htc/runnymede/prebuilt/kernel
 
-BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
-BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
-BOARD_SDEXT_DEVICE := /dev/block/mmcblk0p32
-BOARD_USES_MMCUTILS := false
-BOARD_HAS_NO_MISC_PARTITION := false
+#BOARD_HAS_LARGE_FILESYSTEM := true
+#BOARD_HAS_NO_SELECT_BUTTON := true
+#BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
+#BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
+#BOARD_SDEXT_DEVICE := /dev/block/mmcblk0p32
+#BOARD_USES_MMCUTILS := false
+#BOARD_HAS_NO_MISC_PARTITION := false
 
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file
 
 # for recovery
-BOARD_UMS_LUNFILE := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file
+#BOARD_UMS_LUNFILE := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file

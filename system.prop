@@ -1,68 +1,117 @@
 #
-# system.prop for primou
+# system.prop for runnymede
 #
+
 ro.sf.lcd_density=240
 
-# qcom display
-com.qc.hardware=true
-com.qc.hdmi_out=false
-debug.sf.hw=1
+debug.fb.rgb565 = 0
+debug.enabletr = true
+debug.qctwa.preservebuf = 1
+
+debug.hwc.skipcomposition = 0
+
+rild.libpath=/system/lib/libhtc_ril.so
+# RilLibPath for Ganlite
+rild.libpath.ganlite=/system/lib/librilswitch.so
+rilswitch.vendorlibpath=/system/lib/libhtc_ril.so
+rilswitch.ganlibpath=/system/lib/libganril.so
 
 # Modify MMS APN retry timer from 5s to 2s.
-ro.gsm.2nd_data_retry_config=max_retries=3, 2000, 2000, 2000
+ro.gsm.2nd_data_retry_config = max_retries=3, 2000, 2000, 2000
 
-ro.telephony.ril.v3=signalstrength
-rild.libpath=/system/lib/libhtc_ril.so
-
-ro.ril.ecc.HTC-GCC=999,112,997
-ro.ril.ecc.HTC-WWE=999
-ro.ril.ecc.HTC-ELL=92,93,94
-ro.ril.enable.a52.HTC-ITA=1
-ro.ril.enable.a53.HTC-ITA=1
-ro.ril.enable.a52=0
-ro.ril.enable.a53=1
-ro.ril.disable.fd.plmn.prefix=23402,23410,23411
-ro.ril.enable.sdr=1
-ro.ril.enable.amr.wideband=0
-
-# primou RF team request
-ro.ril.enable.dtm=1
-ro.ril.gprsclass=12
-ro.ril.hsdpa.category=10
-ro.ril.hsupa.category=6
-ro.ril.hsxpa=2
+# vision RF team request
+ro.ril.enable.dtm = 0
+ro.ril.gprsclass = 12
+ro.ril.hsdpa.category = 8
+ro.ril.hsupa.category = 6
+ro.ril.hsxpa = 2
 
 # Default network type.
 # 0 => WCDMA preferred.
 ro.telephony.default_network=0
 
+#
+# system props for the data modules
+#
+ro.use_data_netmgrd=true
+persist.data_netmgrd_nint=8
+#
+
 wifi.interface=wlan0
 wifi.supplicant_scan_interval=15
 
-mobiledata.interfaces=gannet0,rmnet0,rmnet1,rmnet2
-
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
-ro.opengles.version=131072
+ro.opengles.version = 131072
+
+# This is a high density device with more memory, so larger vm heaps for it.
+# For ICS project, default 32m/48m
+dalvik.vm.heapsize=128m
+dalvik.vm.heapgrowthlimit=48m
 
 # For the default value of agps
-ro.ril.def.agps.mode=2
+ro.ril.def.agps.mode = 2
 
 # For HSDPA low throughput
-ro.ril.disable.power.collapse=1
+ro.ril.disable.power.collapse = 1
+
+# Release Bluetooth HW/SW information
+ro.bt.chipset	= Broadcom BCM4329-B1
+ro.bt.stack	= Broadcom BTL-A
+ro.bt.stack.version	= 2.0.50.032
+#0x10000010010100100000011 represent bt profile list
+ro.bt.profiles	= 4270339
+
+# Properties of BTLA stack
+service.brcm.bt.activation = 0
+service.brcm.bt.srv_active = 0
+service.brcm.bt.hcid_active = 0
+service.brcm.bt.btld = 0
+service.brcm.bt.btld_pid = 0
+service.brcm.bt.avrcp_pass_thru = 0
+service.brcm.bt.avrcp_toggle = 1
+service.brcm.bt.local_name =
+
+# For quick boot mode
+persist.sys.shutdown.mode = hibernate
+
+# Vivo China NEL use
+ro.ril.update.vivo.acoustic = 1
 
 # Properties of Scalado Denoise param.
-postprocess.iso_midband=400
-postprocess.denoise_level=5
+postprocess.iso_midband = 400
+postprocess.denoise_level = 5
 
-# Recording Audio Workaround
-ro.camera.sound.disabled=1
+# Following property will be reference by Settings.
+ro.product.processor = 1.5 GHz
+ro.product.ram = 768MB
+ro.product.display_resolution = 4.7 inch WVGA resolution
+ro.product.main_camera = 8M
+ro.product.front_camera = 1.3M
+ro.product.bluetooth = 3.0
+ro.product.wifi = 802.11 b/g/n
 
-# USB Mounting
-persist.sys.usb.config=mass_storage,adb
+# For opensense sdk
+ro.htc.common.version = 2.1.0.0
 
-dalvik.vm.dexopt-data-only=1
+# For emmc phone storage
+ro.phone_fat = 1
+# For ext4 file system
+ro.ext4fs = 1
 
-# disable surface dithering by default                                          
-persist.sys.use_dithering=0                                                     
+# Dump native call stack when an ANR happens to com.htc.launcher.
+profiler.anr_dump_native_uid = 9999
+
+# Enable egl profiler
+debug.egl.profiler = 0
+
+# Properties for supporting framework features
+ro.htc.framework.screencapture = true
+
+# For QC perf binary hooks
+# src:vendor/qcom/proprietary/android-perf/release/lib/<CPU arch>/libqc-opt.so
+ro.vendor.extension_library=/system/lib/libqc-opt.so
+
+# For autobot car pc
+ro.htc.htcmode.data.path = /dev/ttyHSUSB3
 

@@ -15,9 +15,6 @@
 # the msm hw3d client device node is world writable/readable.
 /dev/msm_hw3dc            0666   root       root
 
-# the DIAG device node is world writable/readable.
-/dev/diag                 0666   root       root
-
 # the genlock client device node is world writable/readable.
 /dev/genlock              0666   root      root
 
@@ -28,6 +25,7 @@
 /dev/kgsl-2d1             0666   root       root
 
 # these should not be world writable
+/dev/diag                 0660   radio      radio
 /dev/diag_arm9            0660   radio      radio
 /dev/android_adb          0660   adb        adb
 /dev/android_adb_enable   0660   adb        adb
@@ -49,9 +47,12 @@
 /dev/pmem_adsp*           0660   system     audio
 /dev/pmem_smipool*        0660   system     camera
 /dev/pmem_venc            0660   system     audio
+/dev/msm_vidc_dec         0660   system     audio
+/dev/msm_vidc_enc         0660   system     audio
+/dev/msm_vidc_reg         0660   system     audio
 /dev/gemini*	          0660   system     audio
 /dev/pmem_camera*         0660   system     camera
-/dev/oncrpc/*             0660   root       system
+/dev/oncrpc/*             0660   root       qcom_oncrpc
 /dev/adsp/*               0660   system     audio
 /dev/snd/*                0660   system     audio
 /dev/mt9t013              0660   system     system
@@ -111,20 +112,17 @@
 /dev/sdioctl6             0640   radio      radio
 /dev/sdioctl7             0640   radio      radio
 /dev/sdioctl8             0640   radio      radio
-/dev/rmnet_ctrl           0640   radio      radio
+/dev/rmnet_mux_ctrl       0640   radio      radio
 /dev/qemu_trace           0666   system     system
 /dev/qmi                  0640   radio      radio
 /dev/qmi0                 0640   radio      radio
 /dev/qmi1                 0640   radio      radio
 /dev/qmi2                 0640   radio      radio
 /dev/bus/usb/*            0660   root       usb
-/dev/rawchip0             0660   system     system
 /dev/mtp_usb              0660   root       mtp
 /dev/mdm                  0660   system     system
 /dev/ttyHSL1              0660   system     system
 /dev/tty_sdio_00          0660   system     system
-/dev/block/mmcblk0p17     0660   system     system
-/dev/block/mmcblk0p18     0660   system     system
 /dev/usb_accessory        0660   root       usb
 /dev/video*	          0660   system     camera
 /dev/tun                  0660   system     vpn
