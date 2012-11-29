@@ -58,9 +58,15 @@ PRODUCT_PACKAGES += \
     lights.runnymede \
     sensors.runnymede
 
+#HWC Hal
+PRODUCT_PACKAGES += \
+    hwcomposer.msm7x30\
+    gralloc.msm7x30
+
 # audio
 PRODUCT_PACKAGES += \
-  audio.a2dp.default 
+  audio.a2dp.default \
+  audio_policy.default
 
 # video
 PRODUCT_PACKAGES += \
@@ -72,12 +78,13 @@ PRODUCT_PACKAGES += \
     FileExplorer
 
 # idc files
+#    device/htc/runnymede/prebuilt/usr/idc/runnymede-keypad.idc:system/usr/idc/runnymede-keypad.idc \
+#    device/htc/runnymede/prebuilt/usr/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
+#    device/htc/runnymede/prebuilt/usr/keylayout/synaptics-rmi-touchscreen.kl:system/usr/keylayout/synaptics-rmi-touchscreen.kl
 PRODUCT_COPY_FILES += \
     device/htc/runnymede/prebuilt/usr/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
-#    device/htc/runnymede/prebuilt/usr/idc/runnymede-keypad.idc:system/usr/idc/runnymede-keypad.idc \
     device/htc/runnymede/prebuilt/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
     device/htc/runnymede/prebuilt/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
-#    device/htc/runnymede/prebuilt/usr/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
     device/htc/runnymede/prebuilt/usr/keychars/Generic.kcm:system/usr/keychars/Generic.kcm \
     device/htc/runnymede/prebuilt/usr/keychars/qwerty.kcm:system/usr/keychars/qwerty.kcm \
     device/htc/runnymede/prebuilt/usr/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm \
@@ -87,7 +94,6 @@ PRODUCT_COPY_FILES += \
     device/htc/runnymede/prebuilt/usr/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
     device/htc/runnymede/prebuilt/usr/keylayout/runnymede-keypad.kl:system/usr/keylayout/runnymede-keypad.kl \
     device/htc/runnymede/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
-#    device/htc/runnymede/prebuilt/usr/keylayout/synaptics-rmi-touchscreen.kl:system/usr/keylayout/synaptics-rmi-touchscreen.kl
 
 PRODUCT_COPY_FILES += \
     device/htc/runnymede/prebuilt/etc/vold.fstab:system/etc/vold.fstab
@@ -119,9 +125,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
 ## Kernel modules
-#PRODUCT_COPY_FILES += \
-#    device/htc/runnymede/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko
-
+PRODUCT_COPY_FILES += \
+    device/htc/runnymede/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko
 
 # stuff common to all HTC phones
 #$(call inherit-product, device/htc/common/common.mk)

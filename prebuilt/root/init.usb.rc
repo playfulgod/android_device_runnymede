@@ -50,7 +50,6 @@ on property:sys.usb.config=mass_storage,diag,diag_mdm
     write /sys/devices/platform/android_usb/usb_function_switch 2057
     setprop sys.usb.state $sys.usb.config
 
-#holiday radioflag
 on property:sys.usb.config=mass_storage,adb,diag,modem,diag_mdm,rmnet
     start adbd
     write /sys/devices/platform/android_usb/usb_function_switch 6411
@@ -79,7 +78,6 @@ on property:sys.usb.config=diag,modem,rmnet
     write /sys/devices/platform/android_usb/usb_function_switch 4360
     setprop sys.usb.state $sys.usb.config
 
-#vigor radioflag
 on property:sys.usb.config=mass_storage,adb,diag,modem,modem_mdm,diag_mdm,rmnet
     start adbd
     write /sys/devices/platform/android_usb/usb_function_switch 22795

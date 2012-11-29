@@ -46,6 +46,10 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660                /sys/class/rfkill/rfkill0/state
     
+    # Widevine DRM
+	chown drm system /dev/htcdrm
+	chmod 0660 /dev/htcdrm
+    
     # for modem link
 	chown system system /sys/module/serial/parameters/modem_enabled
 	chown system system /dev/ttyHSUSB0
@@ -96,13 +100,11 @@ on boot
     copy /etc/DxPrdyProvisionObf.pkg /data/DxDrm/Credentials/PlayReady/DxPrdyProvisionObf.pkg
     copy /etc/DxDrmConfig_Server.txt /data/DxDrm/DxDrmConfig_Server.txt
 
-    # Load modules on startup
-    insmod /system/lib/modules/bcmdhd.ko
-    insmod /system/lib/modules/cpaccess.ko
-    insmod /system/lib/modules/dma_test.ko
+    # Load kineto_gan.ko while booting
     insmod /system/lib/modules/kineto_gan.ko
-    insmod /system/lib/modules/reset_modem.ko
-    insmod /system/lib/modules/scsi_wait_scan.ko
+
+    # Load bcmdhd.ko while booting
+    insmod /system/lib/modules/bcmdhd.ko
 
 # compass/accelerometer daemon
 #service akmd /system/bin/akmd
@@ -202,7 +204,12 @@ on property:ro.emmc=1
 
 on property:init.svc.bootanim=stopped
     start qcom-post-boot
-
+    # Overwrite ActivityManager's low memory killer settings
+    write /sys/module/lowmemorykiller/parameters/adj 0,2,4,7,9,12
+    write /sys/module/lowmemorykiller/parameters/minfile 6348,8089,9830,11878,13619,16793
+    write /sys/module/lowmemorykiller/parameters/check_filepages 1
+    # Protect more low memory pages
+    write /proc/sys/vm/lowmem_reserve_ratio 16 16
 # for modem link
 service modem /system/xbin/wireless_modem
     user system
@@ -259,6 +266,4 @@ service qb_offmode_alarm /system/bin/qb_offmode_alarm
 # added for VoIP on 20100629
 export BOOTCLASSPATH=$BOOTCLASSPATH:/system/framework/com.htc.viplib.jar
 
-# Widevine DRM
-chown drm system /dev/htcdrm
-chmod 0660 /dev/htcdrm
+
