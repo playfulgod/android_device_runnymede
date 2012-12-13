@@ -96,11 +96,12 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/android_usb/subsystem/devices/msm_hsusb/gadget/lun0/file
 
 # for recovery
+TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/runnymede/prebuilt/recovery_kernel
 BOARD_UMS_LUNFILE := /sys/devices/platform/android_usb/subsystem/devices/msm_hsusb/gadget/lun0/file
 
-#twrp
-TARGET_RECOVERY_INITRC := /device/htc/runnymede/prebuilt/root/init.rc
+# for twrp
 DEVICE_RESOLUTION := 480x800
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
 BOARD_HAS_NO_REAL_SDCARD := true
 TW_CUSTOM_POWER_BUTTON := 116
-TARGET_PREBUILT_RECOVERY_KERNEL := /device/htc/runnymede/prebuilt/root/kernel
+TW_ALWAYS_RMRF := true
