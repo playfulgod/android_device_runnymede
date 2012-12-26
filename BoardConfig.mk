@@ -86,8 +86,7 @@ TARGET_PREBUILT_KERNEL := device/htc/runnymede/prebuilt/kernel
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk0p34
-#BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
-#BOARD_SDEXT_DEVICE := /dev/block/mmcblk0p2
+BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p33
 BOARD_USES_MMCUTILS := false
 BOARD_HAS_NO_MISC_PARTITION := false
 

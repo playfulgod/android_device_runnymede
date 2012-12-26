@@ -14,7 +14,10 @@
 # limitations under the License.
 #
 
+# common msm7x30 configs
+$(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, vendor/qcom/proprietary/qcom-vendor.mk)
 
 # The gps config appropriate for this device
 
@@ -140,5 +143,5 @@ $(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
 $(call inherit-product, device/htc/runnymede/media_a1026.mk)
 $(call inherit-product, device/htc/runnymede/media_htcaudio.mk)
 
-$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
