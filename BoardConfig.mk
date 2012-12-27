@@ -33,11 +33,17 @@ USE_CAMERA_STUB := true
 
 TARGET_BOOTLOADER_BOARD_NAME := runnymede
 
+TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
+TARGET_USE_SCORPION_PLD_SET := true
+TARGET_SCORPION_BIONIC_PLDOFFS := 6
+TARGET_SCORPION_BIONIC_PLDSIZE := 128
+
 BOARD_KERNEL_CMDLINE := 
 BOARD_KERNEL_BASE := 0x14400000
 BOARD_KERNEL_PAGESIZE := 4096
 
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := runnymede
+BOARD_VENDOR_QCOM_AMSS_VERSION := 1200
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 BOARD_HAVE_HTC_FFC := false
@@ -86,18 +92,17 @@ TARGET_PREBUILT_KERNEL := device/htc/runnymede/prebuilt/kernel
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk0p34
-#BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
-#BOARD_SDEXT_DEVICE := /dev/block/mmcblk0p2
+BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p33
 BOARD_USES_MMCUTILS := false
 BOARD_HAS_NO_MISC_PARTITION := false
 
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/android_usb/subsystem/devices/msm_hsusb/gadget/lun0/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun0/file
 
 # for recovery
 TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/runnymede/prebuilt/recovery_kernel
-BOARD_UMS_LUNFILE := /sys/devices/platform/android_usb/subsystem/devices/msm_hsusb/gadget/lun0/file
+BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun0/file
 
 # for twrp
 DEVICE_RESOLUTION := 480x800

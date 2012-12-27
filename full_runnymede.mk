@@ -20,35 +20,9 @@
 # details, it only fundamentally contains two inherit-product
 # lines, full and maguro, hence its name.
 #
-  
-# Camera
-#PRODUCT_PACKAGES := \
-#    Camera
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
-# The gps config appropriate for this device
-#$(call inherit-product, device/common/gps/gps_us_supl.mk)
-
-#DEVICE_PACKAGE_OVERLAYS += device/htc/runnymede/overlay
-
-#LOCAL_PATH := device/htc/runnymede
-#ifeq ($(TARGET_PREBUILT_KERNEL),)
-#	LOCAL_KERNEL := $(LOCAL_PATH)/kernel
-#else
-#	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-#endif
-
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_KERNEL):kernel
-
-#$(call inherit-product, build/target/product/full.mk)
-
-# This is where we'd set a backup provider if we had one
-#$(call inherit-product, device/sample/products/backup_overlay.mk)
 
 # Inherit from runnymede device
 $(call inherit-product, device/htc/runnymede/device.mk)
@@ -58,6 +32,6 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := cm_runnymede
 PRODUCT_DEVICE := runnymede
 PRODUCT_BRAND := Cyanogenmod
-PRODUCT_MODEL := CM9 Runnymede
+PRODUCT_MODEL := Runnymede
 PRODUCT_MANUFACTURER := HTC
 
