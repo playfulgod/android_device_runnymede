@@ -14,10 +14,11 @@
 # limitations under the License.
 #
 
+# common msm7x30 configs
+$(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # The gps config appropriate for this device
-
 PRODUCT_COPY_FILES += device/htc/runnymede/prebuilt/etc/gps.conf:system/etc/gps.conf
 
 ## (1) First, the most specific values, i.e. the aspects that are specific to GSM
@@ -78,9 +79,6 @@ PRODUCT_PACKAGES += \
     FileExplorer
 
 # idc files
-#    device/htc/runnymede/prebuilt/usr/idc/runnymede-keypad.idc:system/usr/idc/runnymede-keypad.idc \
-#    device/htc/runnymede/prebuilt/usr/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
-#    device/htc/runnymede/prebuilt/usr/keylayout/synaptics-rmi-touchscreen.kl:system/usr/keylayout/synaptics-rmi-touchscreen.kl
 PRODUCT_COPY_FILES += \
     device/htc/runnymede/prebuilt/usr/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
     device/htc/runnymede/prebuilt/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
@@ -140,5 +138,5 @@ $(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
 $(call inherit-product, device/htc/runnymede/media_a1026.mk)
 $(call inherit-product, device/htc/runnymede/media_htcaudio.mk)
 
-$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
